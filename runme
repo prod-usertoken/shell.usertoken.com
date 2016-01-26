@@ -1,4 +1,4 @@
-source ~/.profile
+[ -f ~/.profile ] && . ~/.profile
 
 DATE=$(date)
 PWD=$(pwd)
