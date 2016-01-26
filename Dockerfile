@@ -1,18 +1,15 @@
-FROM ubuntu:14.04.1
+FROM node:0.10.38
+MAINTAINER Nathan LeClaire <nathan@docker.com>
 
-RUN apt-get update -y
-RUN apt-get install -y python-setuptools python-dev build-essential libffi-dev libssl-dev
+ADD . /app
+WORKDIR /app
+RUN npm install
+RUN apt-get update
+RUN apt-get install -y vim
+RUN useradd -d /home/term -m -s /bin/bash term
+RUN echo 'term:term' | chpasswd
 
-WORKDIR /opt
-ADD . /opt/app
-WORKDIR /opt/app
+EXPOSE 3000
 
-RUN python setup.py build
-RUN python setup.py install
-
-ADD docker/run.sh /opt/run.sh
-RUN chmod 777 /opt/run.sh
-
-EXPOSE 57575
-
-CMD ["/opt/run.sh"]
+ENTRYPOINT ["node"]
+CMD ["app.js", "-p", "3000"]

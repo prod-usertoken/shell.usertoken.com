@@ -5,6 +5,5 @@ PWD=$(pwd)
 
 echo $DATE
 
-pip install butterfly
-pip install libsass
-$PWD/butterfly.server.py --unsecure --host=localhost --port=7000 &
+[ ! -d node_modules ] && npm install
+forever start $PWD/app.js -p 7000
