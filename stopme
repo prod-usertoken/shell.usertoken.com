@@ -1,0 +1,6 @@
+
+DATE=$(date)
+PWD=$(pwd)
+
+echo "$DATE : stopping $PWD"
+ps -ef |grep $PWD | grep -v grep | awk '{ print $2 }' | xargs kill -9

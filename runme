@@ -1,0 +1,10 @@
+source ~/.profile
+
+DATE=$(date)
+PWD=$(pwd)
+
+echo $DATE
+
+pip install butterfly
+pip install libsass
+$PWD/butterfly.server.py --unsecure --host=localhost --port=7000 &
